@@ -85,6 +85,10 @@ public:
         return this->all_jobs;
     }
 
+    int getSmashPid(){
+        return this->smash_pid;
+    }
+
 
     // TODO: add extra methods as needed
 };
