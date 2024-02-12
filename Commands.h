@@ -4,7 +4,13 @@
 #include <vector>
 #include <string>
 #include <memory>
-using namespace std;
+using std::cout;
+using std::endl;
+using std::string;
+using std::vector;
+using std::shared_ptr;
+
+typedef enum {STOPPED , FOREGROUND , BACKGROUND , FINISHED , EMPTY}jobStatus;
 
 #define COMMAND_ARGS_MAX_LENGTH (200)
 #define COMMAND_MAX_ARGS (20)

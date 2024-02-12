@@ -10,13 +10,25 @@
 class JobsList {
 public:
     class JobEntry {
+        int job_id;
+        int job_pid;
+        string job_command_line;
+        jobStatus job_status;
+    public:
+        JobEntry(int jobId, int jobPid, string JobCmdLine, jobStatus status);
+        int getJobId();
+        int getJobPid();
+        string getJobCmdLine();
+        jobStatus getJobStatus();
         // TODO: Add your data members
     };
+    vector<shared_ptr<JobEntry>> allJobs;
+    int maxJobId = 0;
     // TODO: Add your data members
 public:
-    JobsList();
-    ~JobsList();
-    void addJob(Command* cmd, bool isStopped = false);
+    JobsList() = default;
+    ~JobsList() = default;
+    void addJob(Command* cmd, int jobPid, jobStatus status);
     void printJobsList();
     void killAllJobs();
     void removeFinishedJobs();
@@ -24,6 +36,9 @@ public:
     void removeJobById(int jobId);
     JobEntry * getLastJob(int* lastJobId);
     JobEntry *getLastStoppedJob(int *jobId);
+
+    void setMaxJobId(int id);
+    int getMaxJobId();
     // TODO: Add extra methods or modify exisitng ones as needed
 };
 
