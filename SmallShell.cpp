@@ -90,3 +90,26 @@ Command *SmallShell::CreateCommand(const char *cmd_line) {
     }
 }
 
+SmallShell::SmallShell() {
+    this->currPrompt = "smash";
+    this->curr_pid = -1;
+    this->curr_id = -1;
+    this->curr_command_line = "";
+    this->all_jobs = new JobsList();
+    DO_SYS(this->smash_pid = getpid(), getpid);
+}
+
+SmallShell::~SmallShell() {
+    delete this->all_jobs;
+}
+
+void SmallShell::executeCommand(const char* cmd_line)
+{
+    this->all_jobs->removeFinishedJobs();
+    Command* command_to_execute = CreateCommand(cmd_line);
+    if(command_to_execute != nullptr)
+    {
+        command_to_execute->execute();
+    }
+}
+

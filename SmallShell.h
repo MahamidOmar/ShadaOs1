@@ -31,6 +31,7 @@ private:
     int curr_id;
     string curr_command_line;
     JobsList* all_jobs;
+    int smash_pid;
 
 public:
     Command *CreateCommand(const char* cmd_line);
