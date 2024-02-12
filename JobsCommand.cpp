@@ -1,3 +1,5 @@
-//
-// Created by ebrah on 12/02/2024.
-//
+#include "JobsCommand.h"
+
+void JobsCommand::execute() {
+    this->all_jobs->printJobsList();
+}
