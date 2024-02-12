@@ -1,4 +1,15 @@
 #include "JobsList.h"
+#include <unistd.h>
+#include <cstring>
+#include <utility>
+#include <algorithm>
+#include <iostream>
+#include <vector>
+#include <sstream>
+#include <sys/wait.h>
+#include <iomanip>
+#include "Commands.h"
+#include <vector>
 
 //using namespace std;
 
@@ -45,27 +56,81 @@ void JobsList::printJobsList() {
 }
 
 void JobsList::killAllJobs() {
-
+    cout << "smash: sending SIGKILL signal to " << this->allJobs.size() << " jobs:" << endl;
+    for (const auto &item: this->allJobs)
+    {
+        cout << item.get()->getJobPid() << ":" << item.get()->getJobCmdLine() << endl;
+        DO_SYS(kill(item.get()->getJobPid(), SIGKILL), kill);
+    }
 }
 
 void JobsList::removeFinishedJobs() {
-
+    vector<shared_ptr<JobEntry>> still_running;
+    for (const auto &item: this->allJobs){
+        int result = 0;
+        DO_SYS(result = waitpid(item.get()->getJobPid(),NULL,WNOHANG),waitpid);
+        if(result == 0){
+            still_running.push_back(item);
+        }
+    }
+    int new_max = 0;
+    for (const auto &item: still_running){
+        if(item.get()->getJobId() > new_max){
+            new_max = item.get()->getJobId();
+        }
+    }
+    this->setMaxJobId(new_max);
+    this->allJobs = still_running;
 }
 
 JobsList::JobEntry *JobsList::getJobById(int jobId) {
+    for (const auto &item: this->allJobs){
+        if (item.get()->getJobId() == jobId){
+            return item.get();
+        }
+    }
     return nullptr;
 }
 
 void JobsList::removeJobById(int jobId) {
-
+    for(auto item = this->allJobs.begin() ; item < this->allJobs.end() ; item++ ){
+        if (item->get()->getJobId() == jobId){
+            this->allJobs.erase(item);
+            break;
+        }
+    }
+    int new_max = 0;
+    for (const auto &item: this->allJobs){
+        if(item.get()->getJobId() > new_max){
+            new_max = item.get()->getJobId();
+        }
+    }
+    this->setMaxJobId(new_max);
 }
 
 JobsList::JobEntry *JobsList::getLastJob(int *lastJobId) {
+    for (const auto &item: this->allJobs){
+        if(item.get()->getJobId() == this->getMaxJobId()){
+            *lastJobId = item.get()->getJobId();
+            return item.get();
+        }
+    }
+    ////    Not supposed to get here
+    *lastJobId = 0;
     return nullptr;
 }
 
 JobsList::JobEntry *JobsList::getLastStoppedJob(int *jobId) {
-    return nullptr;
+    int max = 0;
+    JobsList::JobEntry* entry_to_return = nullptr;
+    for (const auto &item: this->allJobs){
+        if (item.get()->getJobStatus() == STOPPED && item.get()->getJobId() > max){
+            max = item.get()->getJobId();
+            entry_to_return = item.get();
+        }
+    }
+    *jobId = max;
+    return entry_to_return;
 }
 
 int JobsList::JobEntry::getJobId() {
