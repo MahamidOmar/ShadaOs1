@@ -1,5 +1,6 @@
 #include "ShowPidCommand.h"
 #include "SmallShell.h"
+#include "Helper.h"
 
 void ShowPidCommand::execute(){
     SmallShell& shell = SmallShell::getInstance();
