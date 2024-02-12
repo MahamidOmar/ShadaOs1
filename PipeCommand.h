@@ -1,0 +1,17 @@
+//
+// Created by ebrah on 12/02/2024.
+//
+
+#ifndef COMMANDS_H_PIPECOMMAND_H
+#define COMMANDS_H_PIPECOMMAND_H
+#include "Commands.h"
+
+class PipeCommand : public Command {
+    // TODO: Add your data members
+public:
+    PipeCommand(const char* cmd_line);
+    virtual ~PipeCommand() {}
+    void execute() override;
+};
+
+#endif //COMMANDS_H_PIPECOMMAND_H
