@@ -9,7 +9,7 @@
 
 class ChmodCommand : public BuiltInCommand {
 public:
-    ChmodCommand(const char* cmd_line);
+    ChmodCommand(const char* cmd_line): BuiltInCommand(cmd_line){}
     virtual ~ChmodCommand() {}
     void execute() override;
 };
