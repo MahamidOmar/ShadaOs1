@@ -1,3 +1,13 @@
-//
-// Created by ebrah on 12/02/2024.
-//
+#include "GetCurrDirCommand.h"
+#include "Helper.h"
+#include <limits.h>
+
+void GetCurrDirCommand::execute() {
+    char current_directory[PATH_MAX];
+    char* syscall_result = getcwd(current_directory, sizeof(current_directory));
+    if(syscall_result == NULL){
+        perror("smash error: getcwd failed");
+        return;
+    }
+    cout << current_directory << endl;
+}
