@@ -6,6 +6,21 @@
 #define COMMANDS_H_SMALLSHELL_H
 
 #include "Commands.h"
+#include "JobsList.h"
+#include "RedirectionCommand.h"
+#include "PipeCommand.h"
+#include "QuitCommand.h"
+#include "GetCurrDirCommand.h"
+#include "ChangeDirCommand.h"
+#include "JobsCommand.h"
+#include "ShowPidCommand.h"
+#include "KillCommand.h"
+#include "ForegroundCommand.h"
+#include "ExternalCommand.h"
+#include "ChmodCommand.h"
+
+
+typedef enum {CHPROMPT,SHOWPID,PWD,CD,JOBS,FG,QUIT,KILL,REDIRECTION,PIPE,CHMOD,NOCOMMAND,EXTERNAL} CommandsType;
 
 class SmallShell {
 private:
@@ -15,6 +30,7 @@ private:
     int curr_pid;
     int curr_id;
     string curr_command_line;
+    JobsList* all_jobs;
 
 public:
     Command *CreateCommand(const char* cmd_line);
@@ -58,6 +74,14 @@ public:
 
     int getCurrId(){
         return this->curr_id;
+    }
+
+    void setJobList(JobsList* new_list){
+        this->all_jobs = new_list;
+    }
+
+    JobsList* getJobList(){
+        return this->all_jobs;
     }
 
 

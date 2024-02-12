@@ -8,9 +8,8 @@
 
 class PipeCommand : public Command {
     // TODO: Add your data members
-    bool is_background;
 public:
-    PipeCommand(const char* cmd_line,bool is_background): Command(cmd_line){}
+    PipeCommand(const char* cmd_line): Command(cmd_line){}
     virtual ~PipeCommand() {}
     void execute() override;
 };
