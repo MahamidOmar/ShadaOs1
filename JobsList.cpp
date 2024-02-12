@@ -1,17 +1,10 @@
 #include "JobsList.h"
-#include <unistd.h>
+#include "Helper.h"
 #include <cstring>
-#include <utility>
-#include <algorithm>
 #include <iostream>
 #include <vector>
-#include <sstream>
 #include <sys/wait.h>
-#include <iomanip>
 #include "Commands.h"
-#include <vector>
-
-//using namespace std;
 
 JobsList::JobEntry::JobEntry(int jobId, int jobPid, string jobCmdLine, jobStatus status) {
     this->job_id = jobId;
