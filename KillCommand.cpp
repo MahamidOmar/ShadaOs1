@@ -1,4 +1,4 @@
-#include "KillCommand.h
+#include "KillCommand.h"
 #include "Helper.h"
 #include "SmallShell.h"
 
@@ -11,10 +11,10 @@ bool checkLegalSignal(int signal){
 }
 
 bool isNumber(string str){
-    if(str[0] == "-"){
+    if(str[0] == '-'){
         return false;
     }else{
-        for(int i = 0 ; i < str.length() ++i){
+        for(int i = 0 ; i < str.length() ; ++i){
             if(std::isdigit(str[i]) == 0){
                 return false;
             }
