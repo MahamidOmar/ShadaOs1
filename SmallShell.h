@@ -32,6 +32,7 @@ private:
     string curr_command_line;
     JobsList* all_jobs;
     int smash_pid;
+    string previous_directory;
 
 public:
     Command *CreateCommand(const char* cmd_line);
@@ -87,6 +88,14 @@ public:
 
     int getSmashPid(){
         return this->smash_pid;
+    }
+
+    void setPreviousDirectory(string new_directory){
+        this->previous_directory = new_directory;
+    }
+
+    string getPreviousDirectory(){
+        return this->previous_directory;
     }
 
 

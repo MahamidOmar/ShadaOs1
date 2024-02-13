@@ -96,6 +96,7 @@ SmallShell::SmallShell() {
     this->curr_id = -1;
     this->curr_command_line = "";
     this->all_jobs = new JobsList();
+    this->previous_directory = "";
     DO_SYS(this->smash_pid = getpid(), getpid);
 }
 
