@@ -12,6 +12,15 @@
 #include <sstream>
 #include <sys/wait.h>
 #include <iomanip>
+#include <errno.h>
+#include <csignal>
+#include <signal.h>
+#include <fcntl.h>
+#include <memory>
+#include <limits.h>
+#include <utility>
+#include <algorithm>
+#include <cstring>
 
 using namespace std;
 
