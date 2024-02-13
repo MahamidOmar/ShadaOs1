@@ -25,7 +25,15 @@ typedef enum {CHPROMPT,SHOWPID,PWD,CD,JOBS,FG,QUIT,KILL,REDIRECTION,PIPE,CHMOD,N
 class SmallShell {
 private:
     // TODO: Add your data members
-    SmallShell();
+    SmallShell(){
+        this->currPrompt = "smash";
+        this->curr_pid = -1;
+        this->curr_id = -1;
+        this->curr_command_line = "";
+        this->all_jobs = new JobsList();
+        this->previous_directory = "";
+        DO_SYS(this->smash_pid = getpid(), getpid);
+    }
     string currPrompt;
     int curr_pid;
     int curr_id;
@@ -44,8 +52,18 @@ public:
         // Instantiated on first use.
         return instance;
     }
-    ~SmallShell();
-    void executeCommand(const char* cmd_line);
+    ~SmallShell(){
+        delete this->all_jobs;
+    }
+    void executeCommand(const char* cmd_line){
+        this->all_jobs->removeFinishedJobs();
+        Command* command_to_execute = CreateCommand(cmd_line);
+        cout<<command_to_execute->getCommandLine()<<endl;
+        if(command_to_execute != nullptr)
+        {
+            command_to_execute->execute();
+        }
+    }
     void setPrompt(string new_prompt){
         this->currPrompt = new_prompt;
     }

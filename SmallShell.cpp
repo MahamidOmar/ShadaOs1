@@ -55,7 +55,7 @@ void Chprompt(SmallShell* shell,string cmd){
 
 Command *SmallShell::CreateCommand(const char *cmd_line) {
     string trimmed_command_line = _trim(cmd_line);
-    int end_line = trimmed_command_line.find_first_of("\n");
+    int end_line = trimmed_command_line.find_first_of(" \n");
     string new_command = trimmed_command_line.substr(0,end_line);
     CommandsType curr_type = checkCommandType(new_command);
     switch (curr_type) {
@@ -90,28 +90,28 @@ Command *SmallShell::CreateCommand(const char *cmd_line) {
     }
 }
 
-SmallShell::SmallShell() {
-    this->currPrompt = "smash";
-    this->curr_pid = -1;
-    this->curr_id = -1;
-    this->curr_command_line = "";
-    this->all_jobs = new JobsList();
-    this->previous_directory = "";
-    DO_SYS(this->smash_pid = getpid(), getpid);
-}
+//SmallShell::SmallShell() {
+//    this->currPrompt = "smash";
+//    this->curr_pid = -1;
+//    this->curr_id = -1;
+//    this->curr_command_line = "";
+//    this->all_jobs = new JobsList();
+//    this->previous_directory = "";
+//    DO_SYS(this->smash_pid = getpid(), getpid);
+//}
 
-SmallShell::~SmallShell() {
-    delete this->all_jobs;
-}
+//SmallShell::~SmallShell() {
+//    delete this->all_jobs;
+//}
 
-void SmallShell::executeCommand(const char* cmd_line)
-{
-    this->all_jobs->removeFinishedJobs();
-    Command* command_to_execute = CreateCommand(cmd_line);
-    cout<<command_to_execute->getCommandLine()<<endl;
-    if(command_to_execute != nullptr)
-    {
-        command_to_execute->execute();
-    }
-}
+//void SmallShell::executeCommand(const char* cmd_line)
+//{
+//    this->all_jobs->removeFinishedJobs();
+//    Command* command_to_execute = CreateCommand(cmd_line);
+//    cout<<command_to_execute->getCommandLine()<<endl;
+//    if(command_to_execute != nullptr)
+//    {
+//        command_to_execute->execute();
+//    }
+//}
 
