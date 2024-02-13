@@ -20,6 +20,9 @@ public:
         int getJobPid();
         string getJobCmdLine();
         jobStatus getJobStatus();
+        void setJobStatus(jobStatus new_status){
+            this->job_status = new_status;
+        }
         // TODO: Add your data members
     };
     vector<shared_ptr<JobEntry>> allJobs;
