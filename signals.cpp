@@ -4,6 +4,7 @@
 #include "Commands.h"
 #include "SmallShell.h"
 
+
 using namespace std;
 
 void ctrlCHandler(int sig_num) {
