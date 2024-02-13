@@ -108,6 +108,7 @@ void SmallShell::executeCommand(const char* cmd_line)
 {
     this->all_jobs->removeFinishedJobs();
     Command* command_to_execute = CreateCommand(cmd_line);
+    cout<<command_to_execute->getCommandLine()<<endl;
     if(command_to_execute != nullptr)
     {
         command_to_execute->execute();
