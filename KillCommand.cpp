@@ -46,6 +46,12 @@ void KillCommand::execute()
 
     int job_pid = jobEntry->getJobPid();
     DO_SYS(kill(job_pid, signal), kill);
+    if(signal == SIGSTOP){
+        jobEntry->setJobStatus(STOPPED);
+    }
+    if(signal == SIGCONT){
+        jobEntry->setJobStatus(BACKGROUND);
+    }
     cout << "signal number " << signal << " was sent to pid " << job_pid << endl;
 
 }
