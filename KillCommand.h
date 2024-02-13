@@ -1,6 +1,4 @@
-//
-// Created by ebrah on 12/02/2024.
-//
+
 
 #ifndef COMMANDS_H_KILLCOMMAND_H
 #define COMMANDS_H_KILLCOMMAND_H
