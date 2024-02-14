@@ -44,6 +44,7 @@ void JobsList::printJobsList() {
 }
 
 void JobsList::killAllJobs() {
+    cout << "smash: sending SIGKILL signal to " << this->allJobs.size() << "jobs" << endl;
     for (const auto &item: this->allJobs)
     {
         cout << item.get()->getJobPid() << ":" << item.get()->getJobCmdLine() << endl;
