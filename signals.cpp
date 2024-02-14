@@ -3,6 +3,7 @@
 #include "Commands.h"
 #include "SmallShell.h"
 #include <csignal>
+#include "Helper.h"
 //#include "ExternalCommand.h"
 //#include <memory>
 
