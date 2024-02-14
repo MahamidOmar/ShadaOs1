@@ -4,11 +4,7 @@
 #include <vector>
 #include <string>
 #include <memory>
-using std::cout;
-using std::endl;
-using std::string;
-using std::vector;
-using std::shared_ptr;
+using namespace std;
 
 typedef enum {STOPPED , FOREGROUND , BACKGROUND , FINISHED , EMPTY}jobStatus;
 
