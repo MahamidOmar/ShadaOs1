@@ -46,24 +46,24 @@ const std::string WHITESPACE = " \n\r\t\f\v";
 #define FUNC_EXIT()
 #endif
 
-string _ltrim(const std::string& s)
+inline string _ltrim(const std::string& s)
 {
     size_t start = s.find_first_not_of(WHITESPACE);
     return (start == std::string::npos) ? "" : s.substr(start);
 }
 
-string _rtrim(const std::string& s)
+inline string _rtrim(const std::string& s)
 {
     size_t end = s.find_last_not_of(WHITESPACE);
     return (end == std::string::npos) ? "" : s.substr(0, end + 1);
 }
 
-string _trim(const std::string& s)
+inline string _trim(const std::string& s)
 {
     return _rtrim(_ltrim(s));
 }
 
-int _parseCommandLine(const char* cmd_line, char** args) {
+inline int _parseCommandLine(const char* cmd_line, char** args) {
     FUNC_ENTRY()
     int i = 0;
     std::istringstream iss(_trim(string(cmd_line)).c_str());
@@ -78,12 +78,12 @@ int _parseCommandLine(const char* cmd_line, char** args) {
     FUNC_EXIT()
 }
 
-bool _isBackgroundComamnd(const char* cmd_line) {
+inline bool _isBackgroundComamnd(const char* cmd_line) {
     const string str(cmd_line);
     return str[str.find_last_not_of(WHITESPACE)] == '&';
 }
 
-void _removeBackgroundSign(char* cmd_line) {
+inline void _removeBackgroundSign(char* cmd_line) {
     const string str(cmd_line);
     // find last character other than spaces
     unsigned int idx = str.find_last_not_of(WHITESPACE);
