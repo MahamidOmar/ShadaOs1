@@ -22,7 +22,7 @@ class Command {
     string command_line;
 
  public:
-  Command(const char* cmd_line):command_line(cmd_line){}
+  Command(const char* cmd_line);
   virtual ~Command() = default;
   virtual void execute() = 0;
   string getCommandLine(){
