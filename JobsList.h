@@ -7,6 +7,7 @@
 
 #include "Commands.h"
 
+
 class JobsList {
 public:
     class JobEntry {

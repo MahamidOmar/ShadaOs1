@@ -1,8 +1,10 @@
 #include <iostream>
-#include <signal.h>
 #include "signals.h"
 #include "Commands.h"
 #include "SmallShell.h"
+#include <csignal>
+//#include "ExternalCommand.h"
+//#include <memory>
 
 
 using namespace std;

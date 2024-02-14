@@ -1,6 +1,5 @@
 #include "GetCurrDirCommand.h"
 #include "Helper.h"
-#include <limits.h>
 
 void GetCurrDirCommand::execute() {
     char current_directory[PATH_MAX];

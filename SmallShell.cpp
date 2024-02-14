@@ -2,6 +2,17 @@
 // Created by ebrah on 12/02/2024.
 //
 #include "SmallShell.h"
+#include "RedirectionCommand.h"
+#include "PipeCommand.h"
+#include "QuitCommand.h"
+#include "GetCurrDirCommand.h"
+#include "ChangeDirCommand.h"
+#include "JobsCommand.h"
+#include "ShowPidCommand.h"
+#include "KillCommand.h"
+#include "ForegroundCommand.h"
+#include "ExternalCommand.h"
+#include "ChmodCommand.h"
 #include "Helper.h"
 
 CommandsType  checkCommandType(string cmd){
@@ -90,28 +101,28 @@ Command *SmallShell::CreateCommand(const char *cmd_line) {
     }
 }
 
-//SmallShell::SmallShell() {
-//    this->currPrompt = "smash";
-//    this->curr_pid = -1;
-//    this->curr_id = -1;
-//    this->curr_command_line = "";
-//    this->all_jobs = new JobsList();
-//    this->previous_directory = "";
-//    DO_SYS(this->smash_pid = getpid(), getpid);
-//}
+SmallShell::SmallShell() {
+    this->currPrompt = "smash";
+    this->curr_pid = -1;
+    this->curr_id = -1;
+    this->curr_command_line = "";
+    this->all_jobs = new JobsList();
+    this->previous_directory = "";
+    DO_SYS(this->smash_pid = getpid(), getpid);
+}
 
-//SmallShell::~SmallShell() {
-//    delete this->all_jobs;
-//}
+SmallShell::~SmallShell() {
+    delete this->all_jobs;
+}
 
-//void SmallShell::executeCommand(const char* cmd_line)
-//{
-//    this->all_jobs->removeFinishedJobs();
-//    Command* command_to_execute = CreateCommand(cmd_line);
-//    cout<<command_to_execute->getCommandLine()<<endl;
-//    if(command_to_execute != nullptr)
-//    {
-//        command_to_execute->execute();
-//    }
-//}
+void SmallShell::executeCommand(const char* cmd_line)
+{
+    this->all_jobs->removeFinishedJobs();
+    Command* command_to_execute = CreateCommand(cmd_line);
+    cout<<command_to_execute->getCommandLine()<<endl;
+    if(command_to_execute != nullptr)
+    {
+        command_to_execute->execute();
+    }
+}
 

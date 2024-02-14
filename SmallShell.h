@@ -7,17 +7,7 @@
 
 #include "Commands.h"
 #include "JobsList.h"
-#include "RedirectionCommand.h"
-#include "PipeCommand.h"
-#include "QuitCommand.h"
-#include "GetCurrDirCommand.h"
-#include "ChangeDirCommand.h"
-#include "JobsCommand.h"
-#include "ShowPidCommand.h"
-#include "KillCommand.h"
-#include "ForegroundCommand.h"
-#include "ExternalCommand.h"
-#include "ChmodCommand.h"
+
 
 
 typedef enum {CHPROMPT,SHOWPID,PWD,CD,JOBS,FG,QUIT,KILL,REDIRECTION,PIPE,CHMOD,NOCOMMAND,EXTERNAL} CommandsType;
@@ -25,15 +15,7 @@ typedef enum {CHPROMPT,SHOWPID,PWD,CD,JOBS,FG,QUIT,KILL,REDIRECTION,PIPE,CHMOD,N
 class SmallShell {
 private:
     // TODO: Add your data members
-    SmallShell(){
-        this->currPrompt = "smash";
-        this->curr_pid = -1;
-        this->curr_id = -1;
-        this->curr_command_line = "";
-        this->all_jobs = new JobsList();
-        this->previous_directory = "";
-        DO_SYS(this->smash_pid = getpid(), getpid);
-    }
+    SmallShell();
     string currPrompt;
     int curr_pid;
     int curr_id;
@@ -52,18 +34,8 @@ public:
         // Instantiated on first use.
         return instance;
     }
-    ~SmallShell(){
-        delete this->all_jobs;
-    }
-    void executeCommand(const char* cmd_line){
-        this->all_jobs->removeFinishedJobs();
-        Command* command_to_execute = CreateCommand(cmd_line);
-        cout<<command_to_execute->getCommandLine()<<endl;
-        if(command_to_execute != nullptr)
-        {
-            command_to_execute->execute();
-        }
-    }
+    ~SmallShell();
+    void executeCommand(const char* cmd_line);
     void setPrompt(string new_prompt){
         this->currPrompt = new_prompt;
     }

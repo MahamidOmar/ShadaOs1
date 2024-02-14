@@ -24,6 +24,16 @@
 
 using namespace std;
 
+#define COMMAND_ARGS_MAX_LENGTH (200)
+#define COMMAND_MAX_ARGS (20)
+
+#define DO_SYS(syscall, name) do { \
+    if((syscall) == -1){           \
+        perror("smash error: " #name " failed"); \
+        return;\
+    }                               \
+}while(0)  \
+
 
 const std::string WHITESPACE = " \n\r\t\f\v";
 

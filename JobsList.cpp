@@ -1,10 +1,5 @@
 #include "JobsList.h"
 #include "Helper.h"
-#include <cstring>
-#include <iostream>
-#include <vector>
-#include <sys/wait.h>
-#include "Commands.h"
 
 JobsList::JobEntry::JobEntry(int jobId, int jobPid, string jobCmdLine, jobStatus status) {
     this->job_id = jobId;
