@@ -2,7 +2,6 @@
 // Created by ebrah on 12/02/2024.
 //
 #include "RedirectionCommand.h"
-#include "Helper.h"
 #include "SmallShell.h"
 
 void RedirectionCommandHelper(string command,string direction,int flag){

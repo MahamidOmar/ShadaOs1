@@ -1,9 +1,7 @@
 #include "ChangeDirCommand.h"
-#include "Helper.h"
 #include "SmallShell.h"
 #include <unistd.h>
 #include <iostream>
-#include <cstring>
 
 bool checkChangeDirLegal(int command_words){
     if(command_words == 1){

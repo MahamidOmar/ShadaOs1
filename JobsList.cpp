@@ -1,5 +1,4 @@
 #include "JobsList.h"
-#include "Helper.h"
 
 JobsList::JobEntry::JobEntry(int jobId, int jobPid, string jobCmdLine, jobStatus status) {
     this->job_id = jobId;

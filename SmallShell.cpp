@@ -13,7 +13,6 @@
 #include "ForegroundCommand.h"
 #include "ExternalCommand.h"
 #include "ChmodCommand.h"
-#include "Helper.h"
 
 CommandsType  checkCommandType(string cmd){
     if (cmd.find('>') != string::npos){

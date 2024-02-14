@@ -2,7 +2,6 @@
 // Created by ebrah on 12/02/2024.
 //
 #include "ForegroundCommand.h"
-#include "Helper.h"
 #include "SmallShell.h"
 
 void ForegroundCommandHelper(int job_id,JobsList* list){

@@ -1,5 +1,4 @@
 #include "QuitCommand.h"
-#include "Helper.h"
 
 void QuitCommand::execute() {
     string current_command_trimmed = _trim(this->command_line);

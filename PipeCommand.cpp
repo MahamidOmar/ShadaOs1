@@ -2,7 +2,6 @@
 // Created by ebrah on 12/02/2024.
 //
 #include "PipeCommand.h"
-#include "Helper.h"
 #include "SmallShell.h"
 
 void pipeHelper(string left_command,string right_command,int num_fd){

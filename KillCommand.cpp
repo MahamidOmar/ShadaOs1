@@ -1,5 +1,4 @@
 #include "KillCommand.h"
-#include "Helper.h"
 #include "SmallShell.h"
 
 bool checkLegalSignal(int signal){

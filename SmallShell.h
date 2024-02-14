@@ -9,7 +9,6 @@
 #include "JobsList.h"
 
 
-
 typedef enum {CHPROMPT,SHOWPID,PWD,CD,JOBS,FG,QUIT,KILL,REDIRECTION,PIPE,CHMOD,NOCOMMAND,EXTERNAL} CommandsType;
 
 class SmallShell {
