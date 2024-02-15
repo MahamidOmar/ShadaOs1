@@ -1,0 +1,42 @@
+smash> smash: got ctrl-C
+smash: process 2 was killed
+smash> smash: got ctrl-C
+smash: process 3 was killed
+smash> smash: got ctrl-C
+smash: process 4 was killed
+smash> smash: got ctrl-C
+smash: process 5 was killed
+smash> smash: got ctrl-C
+smash: process 6 was killed
+7> 7> 7: sending SIGKILL signal to 0 jobs:
+7: sending SIGKILL signal to 0 jobs:
+7> smash: sending SIGKILL signal to 0 jobs:
+7: sending SIGKILL signal to 0 jobs:
+7> smash> smash: sending SIGKILL signal to 0 jobs:
+7: sending SIGKILL signal to 0 jobs:
+7> smash: sending SIGKILL signal to 0 jobs:
+7: sending SIGKILL signal to 0 jobs:
+7> 7: sending SIGKILL signal to 0 jobs:
+7: sending SIGKILL signal to 0 jobs:
+7> smash: sending SIGKILL signal to 0 jobs:
+7: sending SIGKILL signal to 0 jobs:
+7> smash> smash: sending SIGKILL signal to 0 jobs:
+7: sending SIGKILL signal to 0 jobs:
+7> smash: sending SIGKILL signal to 0 jobs:
+7: sending SIGKILL signal to 0 jobs:
+7> 7> smash: sending SIGKILL signal to 0 jobs:
+7: sending SIGKILL signal to 0 jobs:
+7> smash: sending SIGKILL signal to 0 jobs:
+7: sending SIGKILL signal to 0 jobs:
+7> smash> smash: sending SIGKILL signal to 0 jobs:
+7: sending SIGKILL signal to 0 jobs:
+7> smash: sending SIGKILL signal to 0 jobs:
+7: sending SIGKILL signal to 0 jobs:
+7> 7: sending SIGKILL signal to 0 jobs:
+7: sending SIGKILL signal to 0 jobs:
+7> smash: sending SIGKILL signal to 0 jobs:
+7: sending SIGKILL signal to 0 jobs:
+7> smash> smash: sending SIGKILL signal to 0 jobs:
+7: sending SIGKILL signal to 0 jobs:
+7> smash: sending SIGKILL signal to 0 jobs:
+7: sending SIGKILL signal to 0 jobs:

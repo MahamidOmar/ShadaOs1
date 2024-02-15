@@ -1,4 +1,5 @@
 #include "JobsList.h"
+#include "Commands.h"
 
 JobsList::JobEntry::JobEntry(int jobId, int jobPid, string jobCmdLine, jobStatus status) {
     this->job_id = jobId;
@@ -46,7 +47,7 @@ void JobsList::killAllJobs() {
     cout << "smash: sending SIGKILL signal to " << this->allJobs.size() << " jobs:" << endl;
     for (const auto &item: this->allJobs)
     {
-        cout << item.get()->getJobPid() << ":" << item.get()->getJobCmdLine() << endl;
+        cout << item.get()->getJobPid() << ": " << item.get()->getJobCmdLine() << endl;
         DO_SYS(kill(item.get()->getJobPid(), SIGKILL), kill);
     }
 }
@@ -54,6 +55,8 @@ void JobsList::killAllJobs() {
 void JobsList::removeFinishedJobs() {
     vector<shared_ptr<JobEntry>> still_running;
     for (const auto &item: this->allJobs){
+        if (item -> getJobStatus() == FOREGROUND)
+            continue;
         int result = 0;
         DO_SYS(result = waitpid(item.get()->getJobPid(),NULL,WNOHANG),waitpid);
         if(result == 0){

@@ -1,7 +1,7 @@
 #TODO: replace ID with your own IDS, for example: 123456789_123456789
 SUBMITTERS := <student1-ID>_<student2-ID>
 COMPILER := g++
-COMPILER_FLAGS := --std=c++11 -Wall -g
+COMPILER_FLAGS := --std=c++11 -Wall -Ofast # -g
 SRCS := $(wildcard *.cpp)
 OBJS=$(subst .cpp,.o,$(SRCS))
 HDRS := $(wildcard *.h)
@@ -12,10 +12,6 @@ SMASH_BIN := smash
 test: $(TESTS_OUTPUTS)
 
 $(TESTS_OUTPUTS): $(SMASH_BIN)
-$(TESTS_OUTPUTS): test_output%.txt: test_input%.txt test_expected_output%.txt
-	./$(SMASH_BIN) < $(word 1, $^) > $@
-	diff $@ $(word 2, $^)
-	echo $(word 1, $^) ++PASSED++
 
 $(SMASH_BIN): $(OBJS)
 	$(COMPILER) $(COMPILER_FLAGS) $^ -o $@

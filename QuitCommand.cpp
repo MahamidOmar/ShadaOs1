@@ -10,6 +10,6 @@ void QuitCommand::execute() {
 //            cout << "smash: sending SIGKILL signal to " << this->all_jobs.size() << " jobs:" << endl;
             this->all_jobs->killAllJobs();
         }
-        exit(0);
     }
+    exit(0);
 }
