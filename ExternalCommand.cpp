@@ -24,7 +24,12 @@ void ExternalCommand::execute() {
     if (pid == 0) {
         DO_SYS(setpgrp() , setpgrp);
         if (simple_command){
-            DO_SYS(execvp(parsed[0],parsed) , execvp );
+            if(execvp(parsed[0],parsed) == -1)
+            {
+                perror("smash error: execvp failed");
+                exit(1);
+            }
+            //DO_SYS(execvp(parsed[0],parsed) , execvp );
         }else{
             char *argv[] = {"/bin/bash", "-c", command, nullptr};
             DO_SYS(execv("/bin/bash", argv), execv);
