@@ -29,7 +29,7 @@ void ForegroundCommandHelper(int job_id,JobsList::JobEntry* curr_job){
     return;
 }
 
-bool isNumber(string str){
+bool isNumber2(string str){
     int i = 0;
     if (str[0] == '-')
         i = 1;
@@ -51,7 +51,7 @@ void ForegroundCommand::execute() {
     }
     char* parsed_command[COMMAND_MAX_ARGS];
     int num_of_args = _parseCommandLine(this->command_line.c_str(), parsed_command);
-    if (!isNumber(parsed_command[1])){
+    if (!isNumber2(parsed_command[1])){
         cerr << "smash error: fg: invalid arguments" << endl;
         return;
     }
