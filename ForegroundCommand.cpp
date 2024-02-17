@@ -7,92 +7,63 @@
 #include <stdexcept>
 #include <algorithm>
 
-void ForegroundCommandHelper(int job_id,JobsList::JobEntry* curr_job){
+void handleForegroundCommand(int jobId, JobsList::JobEntry* currentJob){
     SmallShell& smash = SmallShell::getInstance();
-    if(job_id == 0){
-        std::cerr << "smash error: fg: jobs list is empty" << endl;
+    if(jobId == 0){
+        std::cerr << "smash error: fg: jobs list is empty" << std::endl;
         return;
     }
-//    JobsList::JobEntry* curr_job = list->getJobById(job_id);
-//    if(!curr_job){
-//        std::cerr << "smash error: fg: job-id " << job_id << " does not exist" << endl;
-//        return;
-//    }
-    smash.setLine(curr_job->getJobCmdLine());
-    smash.setCurrPid(curr_job->getJobPid());
-    DO_SYS(kill(curr_job->getJobPid(),SIGCONT) , kill);
-    cout << curr_job->getJobCmdLine() <<" "<<curr_job->getJobPid() << endl;
-    curr_job->setJobStatus(FOREGROUND);
-    waitpid (curr_job->getJobPid() , nullptr , WUNTRACED);
+    smash.setLine(currentJob->getJobCmdLine());
+    smash.setCurrPid(currentJob->getJobPid());
+    DO_SYS(kill(currentJob->getJobPid(),SIGCONT) , kill);
+    std::cout << currentJob->getJobCmdLine() <<" "<<currentJob->getJobPid() << std::endl;
+    currentJob->setJobStatus(FOREGROUND);
+    waitpid (currentJob->getJobPid() , nullptr , WUNTRACED);
     smash.setLine("") ;
     smash.setCurrPid(-1);
     return;
 }
 
-bool isNumber2(string str){
-    int i = 0;
-    if (str[0] == '-')
-        i = 1;
-    for(; i < str.length() ; ++i){
-        if(std::isdigit(str[i]) == 0){
-            return false;
-        }
-    }
-    return true;
+bool isNumericString(std::string str){
+    int startIndex = str[0] == '-' ? 1 : 0;
+    return std::all_of(str.begin() + startIndex, str.end(), ::isdigit);
 }
 
 void ForegroundCommand::execute() {
-    string trimmed = _trim(this->command_line);
-    string splited = "";
-    string job_number = "";
-//    if (trimmed.find_first_of(" \n") != string::npos) {
-//        splited = _trim(trimmed.substr(trimmed.find_first_of(" \n")));
-//        job_number = splited.substr(0, splited.find_first_of(" \n"));
-//    }
-    char* parsed_command[COMMAND_MAX_ARGS];
-    int num_of_args = _parseCommandLine(this->command_line.c_str(), parsed_command);
-    if (num_of_args>=2 && !isNumber2(parsed_command[1])){
-        cerr << "smash error: fg: invalid arguments" << endl;
+    std::string trimmedCommand = _trim(this->command_line);
+    std::string jobNumber = "";
+    char* parsedCommand[COMMAND_MAX_ARGS];
+    int argCount = _parseCommandLine(this->command_line.c_str(), parsedCommand);
+    if (argCount >= 2 && !isNumericString(parsedCommand[1])){
+        std::cerr << "smash error: fg: invalid arguments" << std::endl;
         return;
     }
-
-//    bool ValidNumber = true;
-//    std::for_each(splited.begin(), splited.end(), [&](const char &c) {
-//        if (!std::isdigit(c))
-//            ValidNumber = false;
-//    });
-//    if (!ValidNumber) {
-//        cerr << "smash error: fg: invalid arguments" << endl;
-//        return;
-//    }
-
-    int job_id;
-    JobsList::JobEntry* curr_job;
-    if(num_of_args >=2){
-        job_id = stoi(parsed_command[1]);
-        curr_job = this->all_jobs->getJobById(job_id);
-        if(!curr_job){
-            std::cerr << "smash error: fg: job-id " << job_id << " does not exist" << endl;
+    int jobId;
+    JobsList::JobEntry* currentJob;
+    if(argCount >= 2){
+        jobId = std::stoi(parsedCommand[1]);
+        currentJob = this->all_jobs->getJobById(jobId);
+        if(!currentJob){
+            std::cerr << "smash error: fg: job-id " << jobId << " does not exist" << std::endl;
             return;
         }
     }else{
-        job_id = this->all_jobs->maxJobId;
-        curr_job = this->all_jobs->getJobById(job_id);
-        if (splited.find_first_of(" \n") != string::npos)
+        jobId = this->all_jobs->maxJobId;
+        currentJob = this->all_jobs->getJobById(jobId);
+        if (trimmedCommand.find_first_of(" \n") != std::string::npos)
         {
-            cerr << "smash error: fg: invalid arguments" << endl;
+            std::cerr << "smash error: fg: invalid arguments" << std::endl;
             return;
         }
     }
     if(this->all_jobs->allJobs.size() == 0){
-        std::cerr << "smash error: fg: jobs list is empty" << endl;
+        std::cerr << "smash error: fg: jobs list is empty" << std::endl;
         return;
     }
 
-    if (num_of_args>2){
-        cerr << "smash error: fg: invalid arguments" << endl;
+    if (argCount > 2){
+        std::cerr << "smash error: fg: invalid arguments" << std::endl;
         return;
     }
-    ForegroundCommandHelper(job_id, curr_job);
+    handleForegroundCommand(jobId, currentJob);
 }
-
