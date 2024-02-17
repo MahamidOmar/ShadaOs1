@@ -26,7 +26,7 @@ public:
         }
         // TODO: Add your data members
     };
-    vector<shared_ptr<JobEntry>> allJobs;
+
     int maxJobId = 0;
     // TODO: Add your data members
 public:
@@ -43,6 +43,7 @@ public:
 
     void setMaxJobId(int id);
     int getMaxJobId();
+    vector<shared_ptr<JobEntry>> allJobs;
     // TODO: Add extra methods or modify exisitng ones as needed
 };
 

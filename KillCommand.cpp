@@ -37,6 +37,10 @@ void KillCommand::execute()
         cerr << "smash error: kill: job-id "<<stoi(parsed_command[2])<< " does not exist"<<endl;
         return;
     }
+    if(num_of_args >3){
+        cerr <<"smash error: kill: invalid arguments"<<endl;
+        return;
+    }
     if(isNumber(parsed_command[1]) == 0 || parsed_command[1][0] != '-' ){
         cerr << "smash error: kill: invalid arguments" << endl;
         return;
