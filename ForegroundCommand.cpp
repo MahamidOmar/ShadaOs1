@@ -29,6 +29,18 @@ void ForegroundCommandHelper(int job_id,JobsList::JobEntry* curr_job){
     return;
 }
 
+bool isNumber(string str){
+    int i = 0;
+    if (str[0] == '-')
+        i = 1;
+    for(; i < str.length() ; ++i){
+        if(std::isdigit(str[i]) == 0){
+            return false;
+        }
+    }
+    return true;
+}
+
 void ForegroundCommand::execute() {
     string trimmed = _trim(this->command_line);
     string splited = "";
@@ -37,20 +49,26 @@ void ForegroundCommand::execute() {
         splited = _trim(trimmed.substr(trimmed.find_first_of(" \n")));
         job_number = splited.substr(0, splited.find_first_of(" \n"));
     }
-
-    bool ValidNumber = true;
-    std::for_each(splited.begin(), splited.end(), [&](const char &c) {
-        if (!std::isdigit(c))
-            ValidNumber = false; 
-    });
-    if (!ValidNumber) {
+    char* parsed_command[COMMAND_MAX_ARGS];
+    int num_of_args = _parseCommandLine(this->command_line.c_str(), parsed_command);
+    if (!isNumber(parsed_command[1])){
         cerr << "smash error: fg: invalid arguments" << endl;
         return;
     }
 
+//    bool ValidNumber = true;
+//    std::for_each(splited.begin(), splited.end(), [&](const char &c) {
+//        if (!std::isdigit(c))
+//            ValidNumber = false;
+//    });
+//    if (!ValidNumber) {
+//        cerr << "smash error: fg: invalid arguments" << endl;
+//        return;
+//    }
+
     int job_id;
     JobsList::JobEntry* curr_job;
-    if(job_number!=""){
+    if(num_of_args >=2){
         job_id = stoi(job_number);
         curr_job = this->all_jobs->getJobById(job_id);
         if(!curr_job){
@@ -70,8 +88,7 @@ void ForegroundCommand::execute() {
         std::cerr << "smash error: fg: jobs list is empty" << endl;
         return;
     }
-    char* parsed_command[COMMAND_MAX_ARGS];
-    int num_of_args = _parseCommandLine(this->command_line.c_str(), parsed_command);
+
     if (num_of_args>2){
         cerr << "smash error: fg: invalid arguments" << endl;
         return;
