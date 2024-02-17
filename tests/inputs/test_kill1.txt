@@ -1,0 +1,7 @@
+
+./printSignals.exe &
+^C
+kill -1 1
+^C
+
+quit kill

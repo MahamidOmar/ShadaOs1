@@ -1,0 +1,4 @@
+smash> smash: got ctrl-C
+smash: process 2 was killed
+3> smash> smash: sending SIGKILL signal to 0 jobs:
+3: sending SIGKILL signal to 0 jobs:

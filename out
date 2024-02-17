@@ -1,0 +1,95 @@
+Running test test_2020_chprompt
+Running test test_2020_jobs
+Running test test_cd1
+Running test test_cd2
+Running test test_cd3
+Running test test_cd_fail
+Running test test_cd
+Running test test_chprompt
+Running test test_external1
+Running test test_fg2
+Running test test_fg3
+Running test test_fg4
+Running test test_fg5
+Running test test_fg
+Running test test_input1
+Running test test_input_almog
+Running test test_jobs1
+Running test test_jobs2
+Running test test_jobs4
+Running test test_jobs
+Running test test_kill1
+Running test test_kill5
+Running test test_params1
+Running test test_pipe2
+Running test test_pipe4
+Running test test_pwd1
+Running test test_pwd
+Running test test_quitkill1
+Running test test_quitkill2
+Running test test_quitkill3
+Running test test_quitkill4
+Running test test_quitnojobs1
+Running test test_quitnojobs2
+Running test test_redirection1
+Running test test_redirection3
+Running test test_showpid1
+Running test test_showpid2
+Running test test_tail2
+Running test test_tail_folders
+Running test test_tail_invalid_args
+Running test test_tail_new_line
+Running test test_tail_no_file
+Running test test_tail
+Running test test_touch_invalid_args_amount
+Running test test_touch_no_file
+
+
+Waiting for all jobs to complete
+#    TEST NAME                       STDOUT  STDERR
+ 1   test_2020_chprompt              [0;32mPASSED[0m  [0;32mPASSED[0m
+ 2   test_2020_jobs                  [0;32mPASSED[0m  [0;32mPASSED[0m
+ 3   test_cd1                        [0;32mPASSED[0m  [0;32mPASSED[0m
+ 4   test_cd2                        [0;32mPASSED[0m  [0;32mPASSED[0m
+ 5   test_cd3                        [0;32mPASSED[0m  [0;32mPASSED[0m
+ 6   test_cd_fail                    [0;32mPASSED[0m  [0;32mPASSED[0m
+ 7   test_cd                         [0;32mPASSED[0m  [0;32mPASSED[0m
+ 8   test_chprompt                   [0;32mPASSED[0m  [0;32mPASSED[0m
+ 9   test_external1                  [0;32mPASSED[0m  [0;32mPASSED[0m
+ 10  test_fg2                        [0;32mPASSED[0m  [0;32mPASSED[0m
+ 11  test_fg3                        [0;32mPASSED[0m  [0;32mPASSED[0m
+ 12  test_fg4                        [0;32mPASSED[0m  [0;32mPASSED[0m
+ 13  test_fg5                        [0;32mPASSED[0m  [0;32mPASSED[0m
+ 14  test_fg                         [0;32mPASSED[0m  [0;32mPASSED[0m
+ 15  test_input1                     [0;32mPASSED[0m  [0;32mPASSED[0m
+ 16  test_input_almog                [0;32mPASSED[0m  [0;32mPASSED[0m
+ 17  test_jobs1                      [0;32mPASSED[0m  [0;32mPASSED[0m
+ 18  test_jobs2                      [0;32mPASSED[0m  [0;32mPASSED[0m
+ 19  test_jobs4                      [0;32mPASSED[0m  [0;32mPASSED[0m
+ 20  test_jobs                       [0;32mPASSED[0m  [0;32mPASSED[0m
+ 21  test_kill1                      [0;32mPASSED[0m  [0;32mPASSED[0m
+ 22  test_kill5                      [0;32mPASSED[0m  [0;32mPASSED[0m
+ 23  test_params1                    [0;32mPASSED[0m  [0;32mPASSED[0m
+ 24  test_pipe2                      [0;32mPASSED[0m  [0;32mPASSED[0m
+ 25  test_pipe4                      [0;32mPASSED[0m  [0;32mPASSED[0m
+ 26  test_pwd1                       [0;32mPASSED[0m  [0;32mPASSED[0m
+ 27  test_pwd                        [0;32mPASSED[0m  [0;32mPASSED[0m
+ 28  test_quitkill1                  [0;32mPASSED[0m  [0;32mPASSED[0m
+ 29  test_quitkill2                  [0;32mPASSED[0m  [0;32mPASSED[0m
+ 30  test_quitkill3                  [0;32mPASSED[0m  [0;32mPASSED[0m
+ 31  test_quitkill4                  [0;32mPASSED[0m  [0;32mPASSED[0m
+ 32  test_quitnojobs1                [0;32mPASSED[0m  [0;32mPASSED[0m
+ 33  test_quitnojobs2                [0;32mPASSED[0m  [0;32mPASSED[0m
+ 34  test_redirection1               [0;32mPASSED[0m  [0;32mPASSED[0m
+ 35  test_redirection3               [0;32mPASSED[0m  [0;32mPASSED[0m
+ 36  test_showpid1                   [0;32mPASSED[0m  [0;32mPASSED[0m
+ 37  test_showpid2                   [0;32mPASSED[0m  [0;32mPASSED[0m
+ 38  test_tail2                      [0;32mPASSED[0m  [0;32mPASSED[0m
+ 39  test_tail_folders               [0;32mPASSED[0m  [0;32mPASSED[0m
+ 40  test_tail_invalid_args          [0;32mPASSED[0m  [0;32mPASSED[0m
+ 41  test_tail_new_line              [0;32mPASSED[0m  [0;32mPASSED[0m
+ 42  test_tail_no_file               [0;32mPASSED[0m  [0;32mPASSED[0m
+ 43  test_tail                       [0;32mPASSED[0m  [0;32mPASSED[0m
+ 44  test_touch_invalid_args_amount  [0;32mPASSED[0m  [0;32mPASSED[0m
+ 45  test_touch_no_file              [0;32mPASSED[0m  [0;32mPASSED[0m
+[42mALL PASSED![0m

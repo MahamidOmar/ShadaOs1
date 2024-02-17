@@ -3,6 +3,9 @@
 //
 #include "ForegroundCommand.h"
 #include "SmallShell.h"
+#include <cctype>
+#include <stdexcept>
+#include <algorithm>
 
 void ForegroundCommandHelper(int job_id,JobsList* list){
     SmallShell& smash = SmallShell::getInstance();
@@ -18,7 +21,7 @@ void ForegroundCommandHelper(int job_id,JobsList* list){
     smash.setLine(curr_job->getJobCmdLine());
     smash.setCurrPid(curr_job->getJobPid());
     DO_SYS(kill(curr_job->getJobPid(),SIGCONT) , kill);
-    cout << curr_job->getJobCmdLine() <<" : "<<curr_job->getJobPid() << endl;
+    cout << curr_job->getJobCmdLine() <<" "<<curr_job->getJobPid() << endl;
     curr_job->setJobStatus(FOREGROUND);
     waitpid (curr_job->getJobPid() , nullptr , WUNTRACED);
     smash.setLine("") ;
@@ -34,6 +37,18 @@ void ForegroundCommand::execute() {
         splited = _trim(trimmed.substr(trimmed.find_first_of(" \n")));
         job_number = splited.substr(0, splited.find_first_of(" \n"));
     }
+
+    bool ValidNumber = true;
+    std::for_each(splited.begin(), splited.end(), [&](const char &c) {
+        if (!std::isdigit(c))
+            ValidNumber = false; 
+    });
+
+    if (!ValidNumber) {
+        cerr << "smash error: fg: invalid arguments" << endl;
+        return;
+    }
+
     int job_id;
     if(job_number!=""){
         job_id = stoi(job_number);

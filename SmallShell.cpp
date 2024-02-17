@@ -15,12 +15,6 @@
 #include "ChmodCommand.h"
 
 CommandsType  checkCommandType(string cmd){
-    if (cmd.find('>') != string::npos){
-        return REDIRECTION;
-    }
-    if (cmd.find('|') != string::npos){
-        return PIPE;
-    }
     if(cmd == "quit"){
         return QUIT;
     }
@@ -68,6 +62,11 @@ Command *SmallShell::CreateCommand(const char *cmd_line) {
     int end_line = trimmed_command_line.find_first_of(" \n");
     string new_command = trimmed_command_line.substr(0,end_line);
     CommandsType curr_type = checkCommandType(new_command);
+    if (std::string(cmd_line).find('|') != string::npos)
+        curr_type = PIPE;
+    if (std::string(cmd_line).find('>') != string::npos)
+        curr_type = REDIRECTION;
+
     switch (curr_type) {
         case CHPROMPT:
             Chprompt(this, trimmed_command_line);
@@ -118,7 +117,6 @@ void SmallShell::executeCommand(const char* cmd_line)
 {
     this->all_jobs->removeFinishedJobs();
     Command* command_to_execute = CreateCommand(cmd_line);
-    cout<<command_to_execute->getCommandLine()<<endl;
     if(command_to_execute != nullptr)
     {
         command_to_execute->execute();
