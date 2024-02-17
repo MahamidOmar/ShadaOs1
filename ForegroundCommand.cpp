@@ -45,13 +45,13 @@ void ForegroundCommand::execute() {
     string trimmed = _trim(this->command_line);
     string splited = "";
     string job_number = "";
-    if (trimmed.find_first_of(" \n") != string::npos) {
-        splited = _trim(trimmed.substr(trimmed.find_first_of(" \n")));
-        job_number = splited.substr(0, splited.find_first_of(" \n"));
-    }
+//    if (trimmed.find_first_of(" \n") != string::npos) {
+//        splited = _trim(trimmed.substr(trimmed.find_first_of(" \n")));
+//        job_number = splited.substr(0, splited.find_first_of(" \n"));
+//    }
     char* parsed_command[COMMAND_MAX_ARGS];
     int num_of_args = _parseCommandLine(this->command_line.c_str(), parsed_command);
-    if (!isNumber2(parsed_command[1])){
+    if (num_of_args>=2 && !isNumber2(parsed_command[1])){
         cerr << "smash error: fg: invalid arguments" << endl;
         return;
     }
@@ -69,7 +69,7 @@ void ForegroundCommand::execute() {
     int job_id;
     JobsList::JobEntry* curr_job;
     if(num_of_args >=2){
-        job_id = stoi(job_number);
+        job_id = stoi(parsed_command[1]);
         curr_job = this->all_jobs->getJobById(job_id);
         if(!curr_job){
             std::cerr << "smash error: fg: job-id " << job_id << " does not exist" << endl;
