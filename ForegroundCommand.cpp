@@ -70,6 +70,12 @@ void ForegroundCommand::execute() {
         std::cerr << "smash error: fg: jobs list is empty" << endl;
         return;
     }
+    char* parsed_command[COMMAND_MAX_ARGS];
+    int num_of_args = _parseCommandLine(this->command_line.c_str(), parsed_command);
+    if (num_of_args>2){
+        cerr << "smash error: fg: invalid arguments" << endl;
+        return;
+    }
     ForegroundCommandHelper(job_id, curr_job);
 }
 
