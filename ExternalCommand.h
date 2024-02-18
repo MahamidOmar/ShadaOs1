@@ -1,7 +1,3 @@
-//
-// Created by ebrah on 12/02/2024.
-//
-
 #ifndef COMMANDS_H_EXTERNALCOMMAND_H
 #define COMMANDS_H_EXTERNALCOMMAND_H
 

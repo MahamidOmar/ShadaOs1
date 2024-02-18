@@ -1,6 +1,3 @@
-//
-// Created by ebrah on 12/02/2024.
-//
 #include "SmallShell.h"
 #include "RedirectionCommand.h"
 #include "PipeCommand.h"

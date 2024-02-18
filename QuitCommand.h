@@ -1,4 +1,3 @@
-
 #ifndef COMMANDS_H_QUITCOMMAND_H
 #define COMMANDS_H_QUITCOMMAND_H
 #include "JobsList.h"
