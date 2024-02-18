@@ -9,11 +9,13 @@ void handleForegroundCommand(int jobId, JobsList::JobEntry* currentJob){
     smash.setLine(currentJob->getJobCmdLine());
     smash.setCurrPid(currentJob->getJobPid());
     DO_SYS(kill(currentJob->getJobPid(),SIGCONT) , kill);
+    smash.isBackground = _isBackgroundComamnd(currentJob->getJobCmdLine().c_str());
     std::cout << currentJob->getJobCmdLine() <<" "<<currentJob->getJobPid() << std::endl;
     currentJob->setJobStatus(FOREGROUND);
     waitpid (currentJob->getJobPid() , nullptr , WUNTRACED);
     smash.setLine("") ;
     smash.setCurrPid(-1);
+    smash.isBackground = false;
     return;
 }
 

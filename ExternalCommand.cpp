@@ -11,6 +11,7 @@ void ExternalCommand::execute() {
     _parseCommandLine(this->command_line.c_str(), parsed);
     if (_isBackgroundComamnd(command)) {
         _removeBackgroundSign(command);
+        smash.isBackground = true;
     }
     _parseCommandLine(command, parsed);
     int pid;
@@ -40,5 +41,6 @@ void ExternalCommand::execute() {
         smash.setLine("") ;
         smash.setCurrPid(-1);
         smash.setCurrId(-1);
+        smash.isBackground = false;
     }
 }
