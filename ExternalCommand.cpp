@@ -55,17 +55,18 @@
 
 void ExternalCommand::execute() {
     SmallShell &smash = SmallShell::getInstance();
-    std::string command = this->command_line;
-    bool isSimpleCommand = command.find('?') == std::string::npos && command.find('*') == std::string::npos;
+    char* command = (char*)malloc(strlen(this->command_line.c_str())+1);
+    strcpy(command, this->command_line.c_str());
+    bool isSimpleCommand = this->command_line.find('?') == std::string::npos && this->command_line.find('*') == std::string::npos;
 
     char *parsed[COMMAND_MAX_ARGS + 1];
-    _parseCommandLine(command.c_str(), parsed);
+    _parseCommandLine(command, parsed);
 
-    if (_isBackgroundComamnd(command.c_str())) {
-        _removeBackgroundSign(const_cast<char*>(command.c_str()));
+    if (_isBackgroundComamnd(command)) {
+        _removeBackgroundSign(const_cast<char*>(command));
     }
 
-    _parseCommandLine(command.c_str(), parsed);
+    _parseCommandLine(command, parsed);
 
     int pid;
     DO_SYS(pid = fork(), fork);
@@ -79,13 +80,13 @@ void ExternalCommand::execute() {
                 exit(1);
             }
         } else {
-            char *argv[] = {"/bin/bash", "-c", const_cast<char*>(command.c_str()), nullptr};
+            char *argv[] = {"/bin/bash", "-c", const_cast<char*>(command), nullptr};
             DO_SYS(execv("/bin/bash", argv), execv);
         }
         exit(0);
     }
 
-    if(_isBackgroundComamnd(command.c_str())){
+    if(_isBackgroundComamnd(command)){
         smash.getJobList()->removeFinishedJobs();
         smash.getJobList()->addJob(this, pid, BACKGROUND);
     } else {
