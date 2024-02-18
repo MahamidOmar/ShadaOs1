@@ -84,44 +84,6 @@ void JobsList::removeFinishedJobs() {
     this->allJobs = still_running;
 }
 
-//void JobsList::removeFinishedJobs() {
-//    vector<shared_ptr<JobEntry>> still_running;
-//    copy_if(allJobs.begin(), allJobs.end(), back_inserter(still_running), [](const shared_ptr<JobEntry>& job) {
-//        int result = 0;
-//        result = waitpid(job->getJobPid(),NULL,WNOHANG);
-//        return result == 0 && job->getJobStatus() != FOREGROUND;
-//    });
-//    setMaxJobId(max_element(still_running.begin(), still_running.end(), [](const shared_ptr<JobEntry>& a, const shared_ptr<JobEntry>& b) {
-//        return a->getJobId() < b->getJobId();
-//    })->get()->getJobId());
-//    allJobs = move(still_running);
-//}
-
-//JobsList::JobEntry *JobsList::getJobById(int jobId) {
-//    for (const auto &item: this->allJobs){
-//        if (item.get()->getJobId() == jobId){
-//            return item.get();
-//        }
-//    }
-//    return nullptr;
-//}
-
-//void JobsList::removeJobById(int jobId) {
-//    for(auto item = this->allJobs.begin() ; item < this->allJobs.end() ; item++ ){
-//        if (item->get()->getJobId() == jobId){
-//            this->allJobs.erase(item);
-//            break;
-//        }
-//    }
-//    int new_max = 0;
-//    for (const auto &item: this->allJobs){
-//        if(item.get()->getJobId() > new_max){
-//            new_max = item.get()->getJobId();
-//        }
-//    }
-//    this->setMaxJobId(new_max);
-//}
-
 JobsList::JobEntry *JobsList::getJobById(int jobId) {
     vector<shared_ptr<JobEntry>>::iterator jobIter = find_if(allJobs.begin(), allJobs.end(), [jobId](const shared_ptr<JobEntry>& job) { return job->getJobId() == jobId; });
     return jobIter != allJobs.end() ? jobIter->get() : nullptr;
@@ -135,29 +97,42 @@ void JobsList::removeJobById(int jobId) {
 }
 
 JobsList::JobEntry *JobsList::getLastJob(int *lastJobId) {
-    for (const auto &item: this->allJobs){
-        if(item.get()->getJobId() == this->getMaxJobId()){
-            *lastJobId = item.get()->getJobId();
-            return item.get();
-        }
-    }
-    ////    Not supposed to get here
-    *lastJobId = 0;
-    return nullptr;
+    *lastJobId = getMaxJobId();
+    return getJobById(*lastJobId);
 }
 
 JobsList::JobEntry *JobsList::getLastStoppedJob(int *jobId) {
-    int max = 0;
-    JobsList::JobEntry* entry_to_return = nullptr;
-    for (const auto &item: this->allJobs){
-        if (item.get()->getJobStatus() == STOPPED && item.get()->getJobId() > max){
-            max = item.get()->getJobId();
-            entry_to_return = item.get();
-        }
-    }
-    *jobId = max;
-    return entry_to_return;
+    vector<shared_ptr<JobEntry>>::iterator jobIter = max_element(allJobs.begin(), allJobs.end(), [](const shared_ptr<JobEntry>& a, const shared_ptr<JobEntry>& b) {
+        return a->getJobStatus() == STOPPED && a->getJobId() < b->getJobId();
+    });
+    *jobId = jobIter != allJobs.end() ? jobIter->get()->getJobId() : 0;
+    return jobIter != allJobs.end() ? jobIter->get() : nullptr;
 }
+
+//JobsList::JobEntry *JobsList::getLastJob(int *lastJobId) {
+//    for (const auto &item: this->allJobs){
+//        if(item.get()->getJobId() == this->getMaxJobId()){
+//            *lastJobId = item.get()->getJobId();
+//            return item.get();
+//        }
+//    }
+//    ////    Not supposed to get here
+//    *lastJobId = 0;
+//    return nullptr;
+//}
+
+//JobsList::JobEntry *JobsList::getLastStoppedJob(int *jobId) {
+//    int max = 0;
+//    JobsList::JobEntry* entry_to_return = nullptr;
+//    for (const auto &item: this->allJobs){
+//        if (item.get()->getJobStatus() == STOPPED && item.get()->getJobId() > max){
+//            max = item.get()->getJobId();
+//            entry_to_return = item.get();
+//        }
+//    }
+//    *jobId = max;
+//    return entry_to_return;
+//}
 
 int JobsList::JobEntry::getJobId() {
     return this->job_id;
