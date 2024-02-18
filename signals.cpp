@@ -13,6 +13,9 @@ void ctrlCHandler(int sig_num) {
     if(smash.getCurrPid() == -1){
         return;
     }
+    if (smash.getCurrLine() == ""){
+        return;
+    }
     int result;
     DO_SYS(result = kill(smash.getCurrPid() , SIGKILL),kill);
     if(result == -1){
