@@ -24,7 +24,7 @@ void ExternalCommand::execute() {
     DO_SYS(pid = fork(), fork);
     if (pid == 0) {
         DO_SYS(setpgrp() , setpgrp);
-        if (simple_command){
+        if (isSimpleCommand){
             if(execvp(parsed[0],parsed) == -1)
             {
                 perror("smash error: execvp failed");
