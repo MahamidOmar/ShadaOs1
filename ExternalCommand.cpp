@@ -11,7 +11,6 @@ void ExternalCommand::execute() {
     _parseCommandLine(this->command_line.c_str(), parsed);
     if (_isBackgroundComamnd(command)) {
         _removeBackgroundSign(command);
-        smash.isBackground = true;
     }
     _parseCommandLine(command, parsed);
     int pid;
@@ -33,7 +32,6 @@ void ExternalCommand::execute() {
     if( _isBackgroundComamnd(this->command_line.c_str()) ){
         smash.getJobList()->removeFinishedJobs();
         smash.getJobList()->addJob(this,pid,BACKGROUND);
-        smash.isBackground = false;
     }
     else{
         smash.setLine(this->command_line);

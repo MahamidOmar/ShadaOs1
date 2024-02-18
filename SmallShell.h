@@ -82,7 +82,7 @@ public:
     string getPreviousDirectory(){
         return this->previous_directory;
     }
-    bool isBackground = false;
+
 
     // TODO: add extra methods as needed
 };
