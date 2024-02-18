@@ -33,6 +33,7 @@ void ExternalCommand::execute() {
     if( _isBackgroundComamnd(this->command_line.c_str()) ){
         smash.getJobList()->removeFinishedJobs();
         smash.getJobList()->addJob(this,pid,BACKGROUND);
+        smash.isBackground = false;
     }
     else{
         smash.setLine(this->command_line);
@@ -41,6 +42,5 @@ void ExternalCommand::execute() {
         smash.setLine("") ;
         smash.setCurrPid(-1);
         smash.setCurrId(-1);
-        smash.isBackground = false;
     }
 }
