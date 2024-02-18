@@ -9,10 +9,6 @@
 
 void handleForegroundCommand(int jobId, JobsList::JobEntry* currentJob){
     SmallShell& smash = SmallShell::getInstance();
-    if(jobId == 0){
-        std::cerr << "smash error: fg: jobs list is empty" << std::endl;
-        return;
-    }
     smash.setLine(currentJob->getJobCmdLine());
     smash.setCurrPid(currentJob->getJobPid());
     DO_SYS(kill(currentJob->getJobPid(),SIGCONT) , kill);
