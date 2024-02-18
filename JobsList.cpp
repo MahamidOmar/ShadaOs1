@@ -62,25 +62,39 @@ void JobsList::killAllJobs() {
     }
 }
 
+
+//void JobsList::removeFinishedJobs() {
+//    vector<shared_ptr<JobEntry>> still_running;
+//    for (const auto &item: this->allJobs){
+//        if (item -> getJobStatus() == FOREGROUND)
+//            continue;
+//        int result = 0;
+//        DO_SYS(result = waitpid(item.get()->getJobPid(),NULL,WNOHANG),waitpid);
+//        if(result == 0){
+//            still_running.push_back(item);
+//        }
+//    }
+//    int new_max = 0;
+//    for (const auto &item: still_running){
+//        if(item.get()->getJobId() > new_max){
+//            new_max = item.get()->getJobId();
+//        }
+//    }
+//    this->setMaxJobId(new_max);
+//    this->allJobs = still_running;
+//}
+
 void JobsList::removeFinishedJobs() {
     vector<shared_ptr<JobEntry>> still_running;
-    for (const auto &item: this->allJobs){
-        if (item -> getJobStatus() == FOREGROUND)
-            continue;
+    copy_if(allJobs.begin(), allJobs.end(), back_inserter(still_running), [](const shared_ptr<JobEntry>& job) {
         int result = 0;
-        DO_SYS(result = waitpid(item.get()->getJobPid(),NULL,WNOHANG),waitpid);
-        if(result == 0){
-            still_running.push_back(item);
-        }
-    }
-    int new_max = 0;
-    for (const auto &item: still_running){
-        if(item.get()->getJobId() > new_max){
-            new_max = item.get()->getJobId();
-        }
-    }
-    this->setMaxJobId(new_max);
-    this->allJobs = still_running;
+        result = waitpid(job->getJobPid(),NULL,WNOHANG);
+        return result == 0 && job->getJobStatus() != FOREGROUND;
+    });
+    setMaxJobId(max_element(still_running.begin(), still_running.end(), [](const shared_ptr<JobEntry>& a, const shared_ptr<JobEntry>& b) {
+        return a->getJobId() < b->getJobId();
+    })->get()->getJobId());
+    allJobs = move(still_running);
 }
 
 JobsList::JobEntry *JobsList::getJobById(int jobId) {
